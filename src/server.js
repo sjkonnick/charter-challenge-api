@@ -9,6 +9,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.get('/restaurants', (req, res) => {
   const rawData = fs.readFileSync('data/restaurantData.json');
   const restaurants = JSON.parse(rawData.toString());
@@ -30,7 +34,7 @@ app.get('/restaurants', (req, res) => {
 
   if (req.query.search.length) {
     returnRestaurants = returnRestaurants.filter(
-      restaurant =>
+      (restaurant) =>
         restaurant.name.includes(req.query.search) ||
         restaurant.city.includes(req.query.search) ||
         restaurant.genre.toLowerCase().includes(req.query.search),
@@ -38,16 +42,16 @@ app.get('/restaurants', (req, res) => {
   }
 
   if (req.query.state !== 'ALL') {
-    returnRestaurants = returnRestaurants.filter(restaurant => restaurant.state === req.query.state);
+    returnRestaurants = returnRestaurants.filter((restaurant) => restaurant.state === req.query.state);
   }
 
   if (req.query.genre !== 'ALL') {
-    returnRestaurants = returnRestaurants.filter(restaurant => restaurant.genre.includes(req.query.genre));
+    returnRestaurants = returnRestaurants.filter((restaurant) => restaurant.genre.includes(req.query.genre));
   }
 
   if (req.query.attire !== 'ALL') {
     returnRestaurants = returnRestaurants.filter(
-      restaurant => restaurant.attire.toLowerCase() === req.query.attire.toLowerCase(),
+      (restaurant) => restaurant.attire.toLowerCase() === req.query.attire.toLowerCase(),
     );
   }
 
