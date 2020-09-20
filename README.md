@@ -32,7 +32,7 @@ The React application currently handles retrieving and filtering all restaurant 
 * state: string (abbreviated state format)
 * search: string
 * genre: string (one of genres supplied in data)
-* attire: string (of of attires supplied in data)
+* attire: string (one of attires supplied in data)
 * nameSort: string (ASC / DESC / OFF)
 * stateSort: string (ASC / DESC / OFF)
 
